@@ -15,13 +15,11 @@ public class LancheController {
     @Autowired
     private LancheService lancheService;
 
-    //Listar todos os lanches
     @GetMapping
     public ResponseEntity<List<Lanche>> listarTodos() {
         return ResponseEntity.ok(lancheService.listarTodos());
     }
 
-    //Consultar lanche por id
     @GetMapping("/{id}")
     public ResponseEntity<Lanche> buscarPorId(@PathVariable Long id) {
         return lancheService.buscarPorId(id)
@@ -29,14 +27,12 @@ public class LancheController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    //Cadastrar novo lanche
     @PostMapping
     public ResponseEntity<Lanche> salvar(@RequestBody Lanche lanche) {
         Lanche novoLanche = lancheService.salvar(lanche);
         return ResponseEntity.status(201).body(novoLanche);
     }
 
-    //Atualizar lanche por id
     @PutMapping("/{id}")
     public ResponseEntity<Lanche> atualizar(@PathVariable Long id, @RequestBody Lanche lanche) {
         try {
@@ -47,7 +43,6 @@ public class LancheController {
         }
     }
 
-    //Remover lanche por id
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
         try {
